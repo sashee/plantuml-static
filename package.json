@@ -1,0 +1,20 @@
+{
+  "name": "plantuml-static",
+  "version": "1.0.0-v1.2022.14",
+  "description": "",
+  "main": "index.js",
+	"type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"prepare": "node prepare.js"
+  },
+	"files": [
+    "vendor",
+		"index.js"
+  ],
+  "directories": {
+    "lib": "./vendor"
+  },
+  "author": "sashee",
+  "license": "ISC"
+}
