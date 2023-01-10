@@ -5,8 +5,6 @@ import path from "node:path";
 import {pipeline} from "node:stream/promises";
 import { fileURLToPath } from "node:url";
 
-// curl -s https://api.github.com/repos/plantuml/plantuml/releases/latest | jq '{version: .name, url: .assets[] | select(.name == "plantuml.jar") | .browser_download_url}'
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const {plantumlVersion} = packageJson.version.match(/^[^.]+\.[^.]+\.[^.]+-(?<plantumlVersion>.*)$/).groups;

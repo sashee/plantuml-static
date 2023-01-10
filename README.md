@@ -13,9 +13,10 @@ It is recommended to install the platform-specific PlantUML version too so that 
 The path to the jar file is exported by the module:
 
 ```js
-import plantuml from "plantuml-static";
+import plantumlPath from "plantuml-static";
 
-console.log(plantuml)
+console.log(plantumlPath);
+// /tmp/test/node_modules/plantuml-static/vendor/plantuml.jar
 ```
 
 Use this when you invoke PlantUML.
