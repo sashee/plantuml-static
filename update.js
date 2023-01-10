@@ -55,6 +55,6 @@ await writeFile(path.join(__dirname, "package.json"), JSON.stringify(newPackageJ
 // update package-lock.json
 await execProm("npm install");
 await execProm("git add .");
-await execProm(`git commit -m "${newPackageJson}"`);
+await execProm(`git commit -m "${newPackageVersion}"`);
 // tag release
 await execProm(`git tag ${newPackageVersion}`);
