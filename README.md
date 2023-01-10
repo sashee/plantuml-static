@@ -22,3 +22,9 @@ console.log(plantUml.version);
 ```
 
 Use this when you invoke PlantUML.
+
+## Update
+
+Use the built-in updater tool:
+
+```npm run update```
