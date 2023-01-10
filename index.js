@@ -1,6 +1,11 @@
-import path from "node:path";
+import packageJson from "./package.json" assert {type: "json"};
+import {dirname, join} from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export default path.join(__dirname, "vendor", "plantuml.jar");
+const {plantumlVersion} = packageJson.version.match(/^[^.]+\.[^.]+\.[^.]+-(?<plantumlVersion>.*)$/).groups;
+
+export const version = plantumlVersion;
+
+export const path = join(__dirname, "vendor", "plantuml.jar");

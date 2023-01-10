@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const rl = readline.createInterface({ input, output });
 
-const {major, plantumlVersion} = packageJson.version.match(/^(?<major>[^.]+)\.(?<minor>[^.]+)\.(?<patch>[^.]+)-(?<plantumlVersion>.*)$/).groups;
+const {major, minor, patch, plantumlVersion} = packageJson.version.match(/^(?<major>[^.]+)\.(?<minor>[^.]+)\.(?<patch>[^.]+)-(?<plantumlVersion>.*)$/).groups;
 
 const newVersion = await (async () => {
 	const releasesUrl = "https://api.github.com/repos/plantuml/plantuml/releases";
@@ -30,8 +30,6 @@ const newVersion = await (async () => {
 	const availableReleases = allReleases
 		// only stable releases
 		.filter(({draft, prerelease}) => !draft && !prerelease)
-		// can't select the version that is currently selected
-		.filter(({tag_name}) => tag_name !== plantumlVersion)
 		// sort by published date ascending
 		.sort((r1, r2) => new Date(r1.published_at) - new Date(r2.published_at))
 		.map(({tag_name}, i, l) => ({tag_name, position: l.length - i}));
@@ -42,9 +40,8 @@ const newVersion = await (async () => {
 	rl.close();
 	return availableReleases.find(({position}) => String(position) === (selectedVersion !== "" ? selectedVersion : "1")).tag_name;
 })();
-console.log(newVersion)
-const newPackageVersion = `${parseInt(major) + 1}.0.0-${newVersion}`;
-console.log(newPackageVersion);
+const newPackageVersion = newVersion === plantumlVersion ? `${major}.${parseInt(minor) + 1}.${patch}-${newVersion}` : `${parseInt(major) + 1}.0.0-${newVersion}`;
+console.log(`Publishing: ${newPackageVersion}`);
 
 const newPackageJson = {
 	...packageJson,
@@ -59,4 +56,4 @@ await execProm(`git commit -m "${newPackageVersion}"`);
 // tag release
 await execProm(`git tag ${newPackageVersion}`);
 
-console.log("\nNow run:\n git push\ngit push --tags\nnpm publish");
+console.log("\nNow run:\n\ngit push\ngit push --tags\nnpm publish");

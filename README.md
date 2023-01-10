@@ -10,13 +10,15 @@ It is recommended to install the platform-specific PlantUML version too so that 
 
 ## Use
 
-The path to the jar file is exported by the module:
+The path to the jar file and the version is exported by the module:
 
 ```js
-import plantumlPath from "plantuml-static";
+import plantUml from "plantuml-static";
 
-console.log(plantumlPath);
+console.log(plantUml.path);
 // /tmp/test/node_modules/plantuml-static/vendor/plantuml.jar
+console.log(plantUml.version);
+// v1.2023.0
 ```
 
 Use this when you invoke PlantUML.
