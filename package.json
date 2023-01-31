@@ -15,8 +15,10 @@
 	},
 	"files": [
 		"vendor",
-		"index.js"
+		"index.js",
+		"index.d.ts"
 	],
+	"types": "index.d.ts",
 	"directories": {
 		"lib": "./vendor"
 	},
