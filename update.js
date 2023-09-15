@@ -55,5 +55,5 @@ await execProm("git add .");
 await execProm(`git commit -m "${newPackageVersion}"`);
 // tag release
 await execProm(`git tag ${newPackageVersion}`);
-
-console.log("\nNow run:\n\ngit push\ngit push --tags\nnpm publish");
+await execProm("git push");
+await execProm("git push --tags");
