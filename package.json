@@ -9,7 +9,7 @@
 	],
 	"repository": "github:sashee/plantuml-static",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "exit 0",
 		"prepare": "node prepare.js",
 		"update": "node update.js"
 	},
