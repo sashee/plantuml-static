@@ -1,4 +1,4 @@
-import packageJson from "./package.json" assert {type: "json"};
+import packageJson from "./package.json" with {type: "json"};
 import {writeFile} from "node:fs/promises";
 import path from "node:path";
 import * as readline from 'node:readline/promises';
