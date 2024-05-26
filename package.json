@@ -1,6 +1,6 @@
 {
 	"name": "plantuml-static",
-	"version": "20.1.0-v1.2024.4",
+	"version": "21.0.0-v1.2024.5",
 	"description": "Packaged plantuml.jar",
 	"main": "index.js",
 	"type": "module",
