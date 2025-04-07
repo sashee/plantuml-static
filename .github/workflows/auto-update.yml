@@ -1,4 +1,4 @@
-name: Push to gh-pages
+name: Auto update
 
 on:
   schedule:
