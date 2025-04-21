@@ -3,6 +3,7 @@ name: Auto update
 on:
   schedule:
     - cron: '15 1 * * 0'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,4 +16,16 @@ jobs:
       - run: git config --global user.name "auto-update" && git config --global user.email "auto-update@example.com"
       - run: npm ci
       - run: npm run update
+        id: update
+      - name: If a new tag is created call the npm-publish workflow. This is needed because by default a workflow does not trigger other workflows
+        if: ${{ steps.update.outputs.NEW_TAG }}
+        run: |
+          curl -i --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/actions/workflows/npm-publish.yml/dispatches \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "ref": "${{ steps.update.outputs.NEW_TAG }}"
+            }' \
+          --fail-with-body
 

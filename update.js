@@ -1,5 +1,5 @@
 import packageJson from "./package.json" with {type: "json"};
-import {writeFile} from "node:fs/promises";
+import {writeFile, appendFile} from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
@@ -66,6 +66,7 @@ if (newVersion) {
 	await execProm(`git tag ${newPackageVersion}`);
 	await execProm("git push");
 	await execProm("git push --tags");
+	await appendFile(process.env.GITHUB_OUTPUT, `NEW_TAG=${newPackageVersion}`);
 }else {
 	console.log("There is no newer release");
 }
